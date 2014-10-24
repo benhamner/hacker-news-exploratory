@@ -1,5 +1,6 @@
 using DataFrames
 using DataStructures
+using NLP
 
 data = readtable(ARGS[1])
 c=counter(ASCIIString)
@@ -9,7 +10,7 @@ for title=data[:title]
     title = replace(title, r"[^a-z\s]", "")
     title = replace(title, r"\s+", " ")
     println(title)
-    for word=convert(Vector{ASCIIString}, split(title, " "))
+    for word=convert(Vector{ASCIIString}, tokenize(title))
         push!(c, word)
     end
 end
